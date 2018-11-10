@@ -1,0 +1,40 @@
+SCORING
+
+*Upper*
+Aces
+Twos
+Threes
+Fours
+Fives
+Sixes
+Bonus (if upper total ≥ 63) = 35
+
+*Lower*
+3 of a kind = Total
+4 of a kind = Total
+Full House = 25
+Small Straight (4) = 30
+Large Straight (5) = 40
+Yahtzee = 50
+Chance = Total
+Yahtzee Bonus = 100 per bonus
+
+fits = {
+    "upper1": 0,
+    "upper2": 0,
+    "upper3": 0,
+    "upper4": 0,
+    "upper5": 0,
+    "upper6": 0,
+    "three": 0,
+    "four": 0,
+    "fullHouse": 0,
+    "sStraight": 0,
+    "lStraight": 0,
+    "yahtzee": 0,
+    "chance": 1,
+}
+
+
+    if all(sorted([x>=1 for x in count])[2:]): self.fits["lStraight"] += 1
+    if all(x==1 for x in count): self.fits["sStraight"] += 1 ## TODO: Fix the straights (needs to have three >=1's in a row )
