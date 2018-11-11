@@ -30,13 +30,16 @@ class Score: #outputs all possible non-zero scores for a given dice set
         if "1111" in checkStraight(count): self.fits["sStraight"] += 1
         if "11111" in checkStraight(count): self.fits["lStraight"] += 1
 
-    def __init__(self, arg, fits): #arg is the dice set
-        self.dice = [x.value for x in arg] #takes the value for each dice
+    def __init__(self, arg, fits, counted=False): #arg is the dice set
         self.fits = deepcopy(fits)
         self.count = [0, 0, 0, 0, 0, 0, 0]
         self.outcomes = {}
-        for x in self.dice:
-            self.count[x] += 1 #creates a count i.e. if count[1]=3, then there are three ones in the dice set
+        if counted:
+            self.count = arg
+        else:
+            self.dice = [x.value for x in arg] #takes the value for each dice
+            for x in self.dice:
+                self.count[x] += 1 #creates a count i.e. if count[1]=3, then there are three ones in the dice set
         #print(", ".join(["[{}]: {}".format(x, self.count[x]) for x in range(1,7)]))
         self.match()
         for key in self.fits:
@@ -47,3 +50,12 @@ class Score: #outputs all possible non-zero scores for a given dice set
 
     def __repr__(self):
         return ", ".join(["{}({}): {}".format(self.outcomes[x].type, self.outcomes[x].variant, self.outcomes[x].score) for x in self.outcomes])
+
+    def getHighestScore(self):
+        highestScoreID = ""
+        highestScore = 0
+        for x in self.outcomes:
+            if self.outcomes[x].score > highestScore:
+                highestScore = self.outcomes[x].score
+                highestScoreID = self.outcomes[x].type + str(self.outcomes[x].variant) if self.outcomes[x].variant != 0 else self.outcomes[x].type
+        return highestScoreID, highestScore
