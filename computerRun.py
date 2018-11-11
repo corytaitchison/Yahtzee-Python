@@ -33,6 +33,14 @@ class Computer:
         scoreNormal = 20.0
         return (((prob-probNormal)/probNormal)+1) * (((highestScore-scoreNormal)/scoreNormal)+1)
 
+    def chooseScore(self, score, possibles):
+        if score.outcomes:
+            foo, highestScore = score.getHighestScore() #choose the highest score
+            ## TODO: Make this more complicated,
+        else:
+            foo = [x for x in possibles if possibles[x] > -1][0]
+        return foo
+
     def calculateChoice(self, current, possibles, rolls2 = True):
         self.choices = {}
         for goal in self.combinations:
