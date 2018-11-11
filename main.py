@@ -52,8 +52,9 @@ def turn(scorecard):
     if not any(possibles[x] > -1 for x in possibles): return False
     return True
 
-scorecard = Scorecard()
-loop = True
-while loop:
-    loop = turn(scorecard)
-print("GAME OVER: Total score = " + str(scorecard.total))
+if __name__ == "__main__":
+    scorecard = Scorecard()
+    loop = True
+    while loop:
+        loop = turn(scorecard)
+    print("GAME OVER: Total score = " + str(scorecard.total))

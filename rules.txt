@@ -34,7 +34,3 @@ fits = {
     "yahtzee": 0,
     "chance": 1,
 }
-
-
-    if all(sorted([x>=1 for x in count])[2:]): self.fits["lStraight"] += 1
-    if all(x==1 for x in count): self.fits["sStraight"] += 1 ## TODO: Fix the straights (needs to have three >=1's in a row )

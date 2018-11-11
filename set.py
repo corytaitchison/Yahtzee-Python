@@ -8,6 +8,10 @@ class Set: #a collection of dice
             die.roll()
         self.sort()
 
+    def setValues(self, values):
+        for x in len(self.dice):
+            self.dice[x].value = values[x]
+
     def hold(self, actions):
         if not len(self.dice) == len(actions):
             raise ValueError("Inconsistent length")
