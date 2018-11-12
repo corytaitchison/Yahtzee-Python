@@ -6,25 +6,11 @@ from scorecard import *
 from computerRun import Computer
 from sys import stdout
 
-computerPlay = False #Player or computer
-doPrint = True #prints out dice rolls etc. (turn on if player)
+computerPlay = True #Player or computer
+doPrint = False #prints out dice rolls etc. (turn on if player)
 doWrite = False #writes computer output to file
 
-possibles = { #possible choices left
-    "upper1": 0,
-    "upper2": 0,
-    "upper3": 0,
-    "upper4": 0,
-    "upper5": 0,
-    "upper6": 0,
-    "three": 0,
-    "four": 0,
-    "fullHouse": 0,
-    "sStraight": 0,
-    "lStraight": 0,
-    "yahtzee": 0,
-    "chance": 1,
-}
+possibles = {} #possible choices left
 
 def responseToInt(response):
     if response.lower() == "y":
@@ -74,7 +60,7 @@ if __name__ == "__main__":
     if doWrite:
         file = open("computerResults.txt", "w")
         output = []
-    for x in range(1):
+    for x in range(1): #amount of games to play
         possibles = {
             "upper1": 0,
             "upper2": 0,
@@ -102,7 +88,7 @@ if __name__ == "__main__":
             output += [str(scorecard.total)]
             stdout.write(".")
             stdout.flush()
-        print(scorecard)
+        if computerPlay and not doPrint and not doWrite: print(scorecard)
         if not doWrite: print("GAME OVER: Total score = " + str(scorecard.total))
     if doWrite:
         print("")
