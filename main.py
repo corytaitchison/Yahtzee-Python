@@ -6,8 +6,8 @@ from scorecard import *
 from computerRun import Computer
 from sys import stdout
 
-computerPlay = True #Player or computer
-doPrint = False #prints out dice rolls etc. (turn on if player)
+computerPlay = False #Player or computer
+doPrint = True #prints out dice rolls etc. (turn on if player)
 doWrite = False #writes computer output to file
 
 possibles = {} #possible choices left

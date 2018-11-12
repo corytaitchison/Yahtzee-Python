@@ -24,9 +24,9 @@ class Scorecard:
 
     def addScore(self, id, score):
         self.scores[id] = score;
+        if self.upperTotal >= 63: self.scores["upperBonus"] = 35
         self.upperTotal = sum([self.scores[x] for x in self.scores if "upper" in x])
         self.lowerTotal = sum([self.scores[x] for x in self.scores if not "upper" in x])
-        if self.upperTotal >= 63: self.scores["upperBonus"] = 35
         self.total = self.upperTotal + self.lowerTotal
 
     def __repr__(self):
