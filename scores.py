@@ -1,10 +1,10 @@
 from outcomes import *
 from copy import deepcopy
 
-def check(array, val, operator=">="):
-    return eval("[x for x in array if x {} val]".format(operator))
+def check(array, value, operator=">="):
+    return eval("[x for x in array if x {} {}]".format(operator, value))
 
-def checkStraight(array): #converts array to a binary string
+def checkStraight(array): #converts array to a flattened binary string
     output = []
     for x in array:
         if x != 0:

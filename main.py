@@ -4,7 +4,6 @@ from scores import *
 from outcomes import *
 from scorecard import *
 from computerRun import Computer
-from sys import stdout
 from randomRun import RandomComputer
 
 computerPlay = True #Player or computer
@@ -32,7 +31,7 @@ def reroll(diceSet, computer = None, rolls2 = True):
         for x in diceSet.dice:
             actions.append(not int(buffer[x.value])) #convert buffer to input actions y/n
     else:
-        actions = [responseToInt(raw_input("[{}] Fix? y/n ".format( diceSet.dice[x].value))) for x in range(len(diceSet.dice))]
+        actions = [responseToInt(input("[{}] Fix? y/n ".format(diceSet.dice[x].value))) for x in range(len(diceSet.dice))]
     diceSet.hold(actions) #holds the requested dice
     diceSet.rollAll() #rolls the rest
     if doPrint: print(diceSet)
@@ -48,7 +47,7 @@ def turn(scorecard, computer = None):
             print(score) #if scores are available
         else:
             print(": 0, ".join([x for x in possibles if possibles[x] > -1])) #if all scores are 0
-    action = computer.chooseScore(score, possibles) if computer else raw_input("Which score? ") #chooses which score to select
+    action = computer.chooseScore(score, possibles) if computer else input("Which score? ") #chooses which score to select
     try:
         scorecard.addScore(action, score.outcomes[action].score) #if exists, then add points
     except KeyError:
@@ -60,7 +59,7 @@ def turn(scorecard, computer = None):
 
 if __name__ == "__main__":
     if doWrite:
-        file = open("computerRandomResults.txt", "w")
+        file = open("computerResults.txt", "w")
         output = []
     for x in range(1): #amount of games to play
         possibles = {
@@ -88,8 +87,7 @@ if __name__ == "__main__":
                 loop = turn(scorecard, None)
         if doWrite:
             output += [str(scorecard.total)]
-            stdout.write(".")
-            stdout.flush()
+            print(".", end = "", flush = True)
         if computerPlay and not doPrint and not doWrite: print(scorecard)
         if not doWrite: print("GAME OVER: Total score = " + str(scorecard.total))
     if doWrite:

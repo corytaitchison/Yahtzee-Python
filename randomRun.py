@@ -11,7 +11,7 @@ class RandomComputer(computerRun.Computer):
 
     def chooseScore(self, score, possibles):
         if score.outcomes:
-            x = score.outcomes.keys()[random.randrange(0,len(score.outcomes))]
+            x = list(score.outcomes)[random.randrange(0,len(score.outcomes))]
             foo = score.outcomes[x].type + str(score.outcomes[x].variant) if score.outcomes[x].variant != 0 else score.outcomes[x].type
         else:
             foo = [x for x in possibles if possibles[x] > -1][0]

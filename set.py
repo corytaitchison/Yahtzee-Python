@@ -21,6 +21,7 @@ class Set: #a collection of dice
     def rollAll(self):
         for die in self.dice:
             if not die.fixed: die.roll()
+            die.fixed = 0
         self.sort()
 
     def __repr__(self):
