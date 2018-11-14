@@ -5,9 +5,11 @@ from outcomes import *
 from scorecard import *
 from computerRun import Computer
 from sys import stdout
+from randomRun import RandomComputer
 
-computerPlay = False #Player or computer
-doPrint = True #prints out dice rolls etc. (turn on if player)
+computerPlay = True #Player or computer
+randomPlay = False #Random computer
+doPrint = False #prints out dice rolls etc. (turn on if player)
 doWrite = False #writes computer output to file
 
 possibles = {} #possible choices left
@@ -24,7 +26,7 @@ def reroll(diceSet, computer = None, rolls2 = True):
         for x in diceSet.dice:
             count[x.value] += 1 #converts the dice values to a count
         computer.calculateChoice(count, possibles, rolls2) #calculates which to hold
-        buffer = str(computer.action)
+        buffer = str(computer.action) #computer.action is initially a string e.g. "0100011" which means reroll 1 "1", 1 "5" and 1 "6" dice
         actions = []
         if not buffer: buffer = [0, 0, 0, 0, 0, 0, 0] #if buffer is empty, hold none
         for x in diceSet.dice:
@@ -58,7 +60,7 @@ def turn(scorecard, computer = None):
 
 if __name__ == "__main__":
     if doWrite:
-        file = open("computerResults.txt", "w")
+        file = open("computerRandomResults.txt", "w")
         output = []
     for x in range(1): #amount of games to play
         possibles = {
@@ -78,7 +80,7 @@ if __name__ == "__main__":
         }
         scorecard = Scorecard()
         loop = True
-        computer = Computer()
+        computer = RandomComputer() if randomPlay else Computer()
         while loop:
             if computerPlay:
                 loop = turn(scorecard, computer)

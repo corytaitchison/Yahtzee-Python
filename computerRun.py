@@ -16,7 +16,7 @@ def prob2(p, q, n=5):
         output += prob1(p, i, n)*prob1(i, q, n)
     return output
 
-class Computer:
+class Computer(object):
     choices = {}
     combination = []
     action = ""
@@ -31,17 +31,17 @@ class Computer:
     def weight(self, prob, highestScore):
         probNormal = 7.5
         scoreNormal = 20.0
-        return (((prob-probNormal)/probNormal)+1) * (((highestScore-scoreNormal)/scoreNormal)+1)
+        return (((prob-probNormal)/probNormal)+1) * (((highestScore-scoreNormal)/scoreNormal)+1) # TODO: Actually make this good (whats the best way to do this?)
 
     def chooseScore(self, score, possibles):
         if score.outcomes:
             foo, highestScore = score.getHighestScore() #choose the highest score
-            ## TODO: Make this more complicated,
+            ## TODO: Make this more complicated,not just the highest, but based on the probability of getting the remaining options maybe?
         else:
             foo = [x for x in possibles if possibles[x] > -1][0]
         return foo
 
-    def calculateChoice(self, current, possibles, rolls2 = True):
+    def calculateChoice(self, current, possibles, rolls2 = True): #calculates which to hold or reroll
         self.choices = {}
         for goal in self.combinations:
             diff = [goal[x] - current[x] for x in range(len(goal))]
