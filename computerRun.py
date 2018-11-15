@@ -21,17 +21,18 @@ class Computer(object):
     combination = []
     action = ""
 
-    def __init__(self):
+    def __init__(self, probNormal = 7.50, probWeight = 1.00, scoreNormal = 20.00, scoreWeight = 1.00):
         self.choices = {}
+        self.probNormal = probNormal; self.probWeight = probWeight
+        self.scoreNormal = scoreNormal; self.scoreWeight = scoreWeight
         file = open("combinations.txt", "r")
         self.combinations = file.read().split(", ")
         self.combinations = [[int(y) for y in x] for x in self.combinations]
         self.action = ""
 
     def weight(self, prob, highestScore):
-        probNormal = 7.5
-        scoreNormal = 20.0
-        return (((prob-probNormal)/probNormal)+1) * (((highestScore-scoreNormal)/scoreNormal)+1) # TODO: Actually make this good (whats the best way to do this?)
+        return pow((((prob-self.probNormal)/self.probNormal)+1), self.probWeight) * pow((((highestScore-self.scoreNormal)/self.scoreNormal)+1), self.scoreWeight)
+        # TODO: Actually make this good (whats the best way to do this?)
 
     def chooseScore(self, score, possibles):
         if score.outcomes:

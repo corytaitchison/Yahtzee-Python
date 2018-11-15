@@ -9,7 +9,7 @@ from randomRun import RandomComputer
 computerPlay = True #Player or computer
 randomPlay = False #Random computer
 doPrint = False #prints out dice rolls etc. (turn on if player)
-doWrite = False #writes computer output to file
+doWrite = True #writes computer output to file
 
 possibles = {} #possible choices left
 
@@ -61,7 +61,7 @@ if __name__ == "__main__":
     if doWrite:
         file = open("computerResults.txt", "w")
         output = []
-    for x in range(1): #amount of games to play
+    for x in range(10): #amount of games to play
         possibles = {
             "upper1": 0,
             "upper2": 0,
@@ -79,7 +79,7 @@ if __name__ == "__main__":
         }
         scorecard = Scorecard()
         loop = True
-        computer = RandomComputer() if randomPlay else Computer()
+        computer = RandomComputer() if randomPlay else Computer(7.50*0.40, 1.80, 20.0*0.475, 0.35)
         while loop:
             if computerPlay:
                 loop = turn(scorecard, computer)
